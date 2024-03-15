@@ -1,0 +1,162 @@
+[gd_scene load_steps=24 format=3 uid="uid://cholh3op7m2nn"]
+
+[ext_resource type="Texture2D" uid="uid://d2vo0eeknoysn" path="res://assets/image/fearthink-wood.png" id="1_xgqck"]
+[ext_resource type="Shader" path="res://scenes/environment/fire.gdshader" id="2_ot54t"]
+[ext_resource type="Texture2D" uid="uid://dfjifqn3x50il" path="res://assets/image/fearthink-fire.png" id="2_vyto1"]
+[ext_resource type="Shader" path="res://scenes/environment/heat-shimmer.gdshader" id="4_jjqnm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ycip"]
+shader = ExtResource("2_ot54t")
+shader_parameter/radius = 1.3
+shader_parameter/steps = 4
+shader_parameter/vertex_expand = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljx8u"]
+atlas = ExtResource("2_vyto1")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgjsw"]
+atlas = ExtResource("2_vyto1")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coith"]
+atlas = ExtResource("2_vyto1")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf4qa"]
+atlas = ExtResource("2_vyto1")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ni7ae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljx8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgjsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coith")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf4qa")
+}],
+"loop": true,
+"name": &"burn",
+"speed": 10.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_gjyx8"]
+offsets = PackedFloat32Array(0, 0.536878, 0.658662)
+colors = PackedColorArray(0.988235, 1, 0, 1, 1, 0.490196, 0, 1, 1, 0.247059, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mgt20"]
+gradient = SubResource("Gradient_gjyx8")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.518349, 0.53211)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ex86"]
+shader = ExtResource("4_jjqnm")
+shader_parameter/force = 0.485
+shader_parameter/debug = false
+shader_parameter/scale = 0.03
+
+[sub_resource type="Gradient" id="Gradient_ovwj8"]
+offsets = PackedFloat32Array(0, 0.114754, 0.827869, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nsqc8"]
+gradient = SubResource("Gradient_ovwj8")
+
+[sub_resource type="Curve" id="Curve_oh8re"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.233161, 1), 0.0, 0.0, 0, 0, Vector2(0.276339, 0), 0.0, 0.0, 0, 0, Vector2(0.352332, 0.995894), -2.80417, -2.80417, 0, 0, Vector2(0.423143, 0), 0.0, 0.0, 0, 0, Vector2(0.455959, 1), 0.0, 0.0, 0, 0, Vector2(0.492228, 0.0186355), 0.0, 0.0, 0, 0, Vector2(0.566494, 1), 0.0, 0.0, 0, 0, Vector2(0.595855, 0.0145293), 0.0, 0.0, 0, 0, Vector2(0.65285, 1), 0.0, 0.0, 0, 0, Vector2(0.810017, 0.700253), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 12
+
+[sub_resource type="CurveTexture" id="CurveTexture_rm0v2"]
+curve = SubResource("Curve_oh8re")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kg8c0"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 7.61
+direction = Vector3(0, -1, 0)
+spread = 36.707
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, -50, 0)
+damping_min = 10.0
+damping_max = 10.0
+scale_min = 0.5
+scale_max = 1.65
+scale_curve = SubResource("CurveTexture_rm0v2")
+color_ramp = SubResource("GradientTexture1D_nsqc8")
+
+[sub_resource type="Gradient" id="Gradient_ulqug"]
+offsets = PackedFloat32Array(0, 0.603896)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fq1gv"]
+gradient = SubResource("Gradient_ulqug")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.506098)
+
+[sub_resource type="Gradient" id="Gradient_75ih6"]
+offsets = PackedFloat32Array(0, 0.545455, 0.658662)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.490196, 0, 1, 1, 0.247059, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vgw0b"]
+gradient = SubResource("Gradient_75ih6")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.518349, 0.53211)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sp301"]
+radius = 14.0357
+
+[node name="Campfire" type="StaticBody2D"]
+light_mask = 2
+visibility_layer = 2
+
+[node name="Wood" type="Sprite2D" parent="."]
+light_mask = 2
+texture = ExtResource("1_xgqck")
+
+[node name="Fire" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+material = SubResource("ShaderMaterial_4ycip")
+position = Vector2(0, -6.1)
+sprite_frames = SubResource("SpriteFrames_ni7ae")
+animation = &"burn"
+autoplay = "burn"
+frame_progress = 0.909535
+
+[node name="BackgroundLighting" type="PointLight2D" parent="Fire"]
+position = Vector2(0, 6.1)
+texture = SubResource("GradientTexture2D_mgt20")
+texture_scale = 6.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Fire"]
+material = SubResource("ShaderMaterial_7ex86")
+position = Vector2(0, 10.245)
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_kg8c0")
+texture = SubResource("GradientTexture2D_fq1gv")
+lifetime = 1.5
+
+[node name="FireLighting" type="PointLight2D" parent="Fire"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -0.900001)
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_vgw0b")
+texture_scale = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sp301")
+debug_color = Color(0, 0.6, 0.701961, 0)
