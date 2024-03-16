@@ -1,5 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://cholh3op7m2nn"]
+[gd_scene load_steps=26 format=3 uid="uid://cholh3op7m2nn"]
 
+[ext_resource type="Script" path="res://scenes/environment/campfire.gd" id="1_mlund"]
 [ext_resource type="Texture2D" uid="uid://d2vo0eeknoysn" path="res://assets/image/fearthink-wood.png" id="1_xgqck"]
 [ext_resource type="Shader" path="res://scenes/environment/fire.gdshader" id="2_ot54t"]
 [ext_resource type="Texture2D" uid="uid://dfjifqn3x50il" path="res://assets/image/fearthink-fire.png" id="2_vyto1"]
@@ -119,13 +120,22 @@ fill_from = Vector2(0.518349, 0.53211)
 [sub_resource type="CircleShape2D" id="CircleShape2D_sp301"]
 radius = 14.0357
 
-[node name="Campfire" type="StaticBody2D"]
+[sub_resource type="Curve2D" id="Curve2D_q15an"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -43, 0, 0, 0, 0, -32, -30, 0, 0, 0, 0, -45, 3, 0, 0, 0, 0, -29, 29, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 37, 33, 0, 0, 0, 0, 47, 3, 0, 0, 0, 0, 35, -33, 0, 0, 0, 0, 0, -43)
+}
+point_count = 9
+
+[node name="Campfire" type="StaticBody2D" groups=["campfire"]]
 light_mask = 2
 visibility_layer = 2
+position = Vector2(0, -3)
+script = ExtResource("1_mlund")
 
 [node name="Wood" type="Sprite2D" parent="."]
 light_mask = 2
 texture = ExtResource("1_xgqck")
+metadata/_edit_lock_ = true
 
 [node name="Fire" type="AnimatedSprite2D" parent="."]
 light_mask = 2
@@ -135,6 +145,8 @@ sprite_frames = SubResource("SpriteFrames_ni7ae")
 animation = &"burn"
 autoplay = "burn"
 frame_progress = 0.909535
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="BackgroundLighting" type="PointLight2D" parent="Fire"]
 position = Vector2(0, 6.1)
@@ -160,3 +172,7 @@ texture_scale = 2.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sp301")
 debug_color = Color(0, 0.6, 0.701961, 0)
+metadata/_edit_lock_ = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_q15an")
