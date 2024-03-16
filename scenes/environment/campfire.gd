@@ -4,7 +4,7 @@ class_name Campfire
 
 @onready var path : Path2D = $Path2D
 @export var num_points = 10
-@export var random_offset := 5.0
+@export var random_offset := 10.0
 var points_dict = {}
 var progress := 0.0 # 0 to 1
 var progress_rate := 0.125 # 45 deg per sec

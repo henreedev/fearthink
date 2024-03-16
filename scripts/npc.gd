@@ -6,7 +6,7 @@ enum State {IDLE, WALKING, FLEEING, COWERING, FREEZE}
 
 var state : State = State.WALKING
 
-@export var speed := 50.0
+@export var speed := 30.0
 @export var wander_tendency := 0.1 # 0.0 to 1.0, likelyhood to leave campfire and walk in a random direction 
 var paranoia := 0.0
 var max_paranoia := 100.0
