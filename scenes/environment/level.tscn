@@ -43,3 +43,24 @@ script = ExtResource("3_xhvim")
 
 [node name="Woman" parent="Level0" instance=ExtResource("4_pxnl0")]
 position = Vector2(-94, 67)
+
+[node name="Woman2" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman3" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman4" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman5" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman6" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman7" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman8" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)

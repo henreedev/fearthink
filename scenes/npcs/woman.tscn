@@ -15,8 +15,8 @@ gradient = SubResource("Gradient_c12wc")
 shader = ExtResource("2_7u2w5")
 shader_parameter/base_outline_color = Color(0, 0, 0, 1)
 shader_parameter/flash_color = Color(0.839216, 0.835294, 0.823529, 1)
-shader_parameter/fear_progress = 1.0
-shader_parameter/flashing = true
+shader_parameter/fear_progress = 0.0
+shader_parameter/flashing = false
 shader_parameter/flash_freq = 0.25
 shader_parameter/gradient = SubResource("GradientTexture1D_uq0n1")
 
@@ -200,7 +200,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bvc7y"]
 size = Vector2(7, 21)
 
-[node name="Woman" type="Area2D"]
+[node name="Woman" type="Area2D" groups=["npc"]]
 script = ExtResource("1_fytjk")
 metadata/_edit_group_ = true
 

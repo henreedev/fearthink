@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://br67vqr2q2coi"]
+[gd_scene load_steps=8 format=3 uid="uid://br67vqr2q2coi"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_px2qe"]
 [ext_resource type="Texture2D" uid="uid://blg7p4v8k4bpe" path="res://assets/image/fearthink-mc-rot.png" id="2_gs0fi"]
@@ -7,6 +7,14 @@
 [sub_resource type="Curve" id="Curve_iujsl"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.505263, 1), 0.0, 0.0, 0, 0, Vector2(0.842105, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.274725), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vvlwe"]
+radius = 25.0
+
+[sub_resource type="Gradient" id="Gradient_3r6s1"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p13l2"]
+gradient = SubResource("Gradient_3r6s1")
 
 [node name="Player" type="Marker2D"]
 script = ExtResource("1_px2qe")
@@ -27,3 +35,17 @@ length = 150
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="Selector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
+shape = SubResource("CircleShape2D_vvlwe")
+
+[node name="Sprite2D" type="Sprite2D" parent="Selector"]
+visible = false
+position = Vector2(-9.53674e-07, -9.53674e-07)
+scale = Vector2(0.53125, 0.53125)
+texture = SubResource("GradientTexture2D_p13l2")
+
+[connection signal="area_entered" from="Selector" to="." method="_on_selector_area_entered"]
+[connection signal="area_exited" from="Selector" to="." method="_on_selector_area_exited"]
