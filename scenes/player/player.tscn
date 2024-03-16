@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://br67vqr2q2coi"]
+[gd_scene load_steps=18 format=3 uid="uid://br67vqr2q2coi"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_px2qe"]
-[ext_resource type="Texture2D" uid="uid://blg7p4v8k4bpe" path="res://assets/image/fearthink-mc-rot.png" id="2_gs0fi"]
+[ext_resource type="Texture2D" uid="uid://p38b32t1bpwb" path="res://assets/image/fearthink-mc-rot-opaque.png" id="2_4rntq"]
 [ext_resource type="Script" path="res://scenes/player/linetest.gd" id="3_0eiyf"]
+[ext_resource type="Texture2D" uid="uid://cctiqqahq000m" path="res://assets/image/fearthink-reticle.png" id="4_bbr37"]
 
 [sub_resource type="Curve" id="Curve_iujsl"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.505263, 1), 0.0, 0.0, 0, 0, Vector2(0.842105, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.274725), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -11,10 +12,98 @@ point_count = 6
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvlwe"]
 radius = 25.0
 
-[sub_resource type="Gradient" id="Gradient_3r6s1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtyjj"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(64, 0, 16, 44)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_p13l2"]
-gradient = SubResource("Gradient_3r6s1")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ryhf"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(80, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hglig"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(96, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc1n5"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(112, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in5rc"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(128, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqnuf"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(144, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76i6o"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(32, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up2ri"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(48, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ijga"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(0, 0, 16, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q24g"]
+atlas = ExtResource("4_bbr37")
+region = Rect2(16, 0, 16, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3g2of"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtyjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ryhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hglig")
+}],
+"loop": false,
+"name": &"choose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc1n5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in5rc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqnuf")
+}],
+"loop": false,
+"name": &"choose_faded",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76i6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up2ri")
+}],
+"loop": true,
+"name": &"faded",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ijga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q24g")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}]
 
 [node name="Player" type="Marker2D"]
 script = ExtResource("1_px2qe")
@@ -24,7 +113,7 @@ position = Vector2(-2, -9)
 points = PackedVector2Array(2, 9)
 width = 32.0
 width_curve = SubResource("Curve_iujsl")
-texture = ExtResource("2_gs0fi")
+texture = ExtResource("2_4rntq")
 texture_mode = 2
 joint_mode = 2
 begin_cap_mode = 1
@@ -41,11 +130,9 @@ position_smoothing_enabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
 shape = SubResource("CircleShape2D_vvlwe")
 
-[node name="Sprite2D" type="Sprite2D" parent="Selector"]
-visible = false
-position = Vector2(-9.53674e-07, -9.53674e-07)
-scale = Vector2(0.53125, 0.53125)
-texture = SubResource("GradientTexture2D_p13l2")
+[node name="Reticle" type="AnimatedSprite2D" parent="Selector"]
+sprite_frames = SubResource("SpriteFrames_3g2of")
+animation = &"choose_faded"
 
 [connection signal="area_entered" from="Selector" to="." method="_on_selector_area_entered"]
 [connection signal="area_exited" from="Selector" to="." method="_on_selector_area_exited"]

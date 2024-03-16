@@ -1,15 +1,16 @@
 extends Marker2D
 
 enum State {INHABITING, TRAVELLING, PLANNING, READY}
-var state : State = State.PLANNING
+var state : State = State.READY
 var drag_dist := 30.0
 var pan_speed := 50.0
 var level_size : Vector2 
 @onready var game : Game = get_tree().get_first_node_in_group("game")
 @onready var selector : Area2D = $Selector
+@onready var reticle : AnimatedSprite2D = $Selector/Reticle
 var selected_npcs = []
 var selected_npc : NPC 
-var selection_range := 50.0
+var selection_range_sqrd := 50.0 * 50.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -22,6 +23,7 @@ func _act_on_state(delta):
 		State.READY:
 			_move_screen_at_edge(delta)
 			_update_selector()
+			_display_selected_npc()
 		State.TRAVELLING:
 			pass
 		State.INHABITING:
@@ -47,21 +49,33 @@ func _update_selector():
 		var flashing = npc.state == NPC.State.COWERING
 		#Conditions to select: 
 		#1. must be in range 
+		var player_dist = npc.global_position.distance_squared_to(global_position)
+		if player_dist > selection_range_sqrd: break;
 		#2. prioritize flashing
 		var dist = npc.global_position.distance_squared_to(selector.global_position)
-		if dist < best_dist:
-			best_dist = dist
-			best_npc = npc
 		if flashing and dist < best_flashing_dist:
 			best_flashing_dist = dist
 			best_flashing_npc = npc
+			break; # non-flashing case doesn't matter if it's flashing
+		if dist < best_dist:
+			best_dist = dist
+			best_npc = npc
+	# Decide on the best npc to select
 	if best_flashing_npc:
 		selected_npc = best_flashing_npc 
 	else:
 		selected_npc = best_npc if best_npc else null
+
+func _display_selected_npc():
 	if selected_npc:
-		selected_npc.sprite.speed_scale = 10.0
-	
+		reticle.visible = true
+		reticle.global_position = selected_npc.global_position
+		if state != State.TRAVELLING:
+			reticle.animation = "normal"
+		else: reticle.animation = "faded"
+		reticle.play()
+	else:
+		reticle.visible = false
 
 func clamp_pos_to_level_dims():
 	# limit position to screen edge
@@ -85,10 +99,8 @@ func _process(delta):
 func _on_selector_area_entered(area):
 	if area is NPC:
 		selected_npcs.append(area)
-		print("added")
 
 
 func _on_selector_area_exited(area):
 	if area is NPC:
 		selected_npcs.erase(area)
-		print("removed")

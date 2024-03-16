@@ -32,9 +32,13 @@ func follow_random_campfire():
 		following_campfire.clear_npc(self)
 	# find and follow a new one (can be same)
 	var campfires : Array = get_tree().get_nodes_in_group("campfire")
-	var rand = randi_range(0, campfires.size() - 1)
-	var campfire : Campfire = campfires[rand]
-	campfire.follow_random_point(self)
+	var found = false
+	for campfire : Campfire in campfires:
+		if not campfire.slots_full:
+			campfire.follow_random_point(self)
+			found = true
+	if not found:
+		campfires[randi_range(0, campfires.size() - 1)].follow_random_point(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

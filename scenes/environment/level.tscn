@@ -40,6 +40,13 @@ script = ExtResource("3_xhvim")
 [node name="Level0" type="Node2D" parent="."]
 
 [node name="Campfire" parent="Level0" instance=ExtResource("5_38dwb")]
+position = Vector2(-2, -139)
+
+[node name="Campfire2" parent="Level0" instance=ExtResource("5_38dwb")]
+position = Vector2(0, 67)
+
+[node name="Campfire3" parent="Level0" instance=ExtResource("5_38dwb")]
+position = Vector2(166, -37)
 
 [node name="Woman" parent="Level0" instance=ExtResource("4_pxnl0")]
 position = Vector2(-94, 67)
@@ -63,4 +70,55 @@ position = Vector2(-94, 67)
 position = Vector2(-94, 67)
 
 [node name="Woman8" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman9" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman10" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman11" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman12" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman13" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman14" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman15" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman16" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman17" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman18" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman19" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman20" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman21" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman22" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman23" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman24" parent="Level0" instance=ExtResource("4_pxnl0")]
+position = Vector2(-94, 67)
+
+[node name="Woman25" parent="Level0" instance=ExtResource("4_pxnl0")]
 position = Vector2(-94, 67)

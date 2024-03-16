@@ -1,13 +1,13 @@
 extends StaticBody2D
 class_name Campfire
 
-
 @onready var path : Path2D = $Path2D
 @export var num_points = 10
 @export var random_offset := 10.0
 var points_dict = {}
 var progress := 0.0 # 0 to 1
 var progress_rate := 0.125 # 45 deg per sec
+var slots_full = false # true if each follow point has an npc
 
 # inner class, acts like a struct, very pog
 class PointInfo:
@@ -31,17 +31,33 @@ func _create_follow_points():
 		var sprite = Sprite2D.new()
 		sprite.texture = load("res://assets/image/fearthink-mc.png")
 		follow_point.add_child(sprite)
-	
 
 func follow_random_point(npc : NPC): 
-	# num_points should be >0
 	var length = points_dict.size() # should be == num_points
-	var rand = randi_range(0, length - 1)
-	var randomPoint : PointInfo = points_dict.values()[rand] # note that multiple npcs can follow same point
-	randomPoint.currentFollowingNpcs.append(npc)
-	npc.point_index = rand
+	if not slots_full:
+		var found = false
+		for i in range(length):
+			var point : PointInfo = points_dict.values()[i]
+			if point.currentFollowingNpcs.size() > 0: continue
+			# Empty slot found
+			_assign_point(i, npc)
+			found = true
+			break
+		# Check if all were full
+		if not found:
+			slots_full = true
+			var rand = randi_range(0, length - 1)
+			_assign_point(rand, npc)
+	else: 
+		var rand = randi_range(0, length - 1)
+		_assign_point(rand, npc)
+
+func _assign_point(index, npc : NPC):
+	var point : PointInfo = points_dict.values()[index]
+	point.currentFollowingNpcs.append(npc)
+	npc.point_index = index
 	npc.following_campfire = self
-	npc.target_point = points_dict.keys()[rand].global_position
+	npc.target_point = points_dict.keys()[index].global_position
 
 func clear_npc(npc : NPC):
 	var point_to_clear : PointInfo = points_dict.values()[npc.point_index]
