@@ -3,7 +3,7 @@ class_name Level
 
 @export var hue_shift := 0.0;
 @export var darken := 0.0;
-
+static var level0_dims := Vector2(160, 160)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

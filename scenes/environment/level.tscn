@@ -40,8 +40,6 @@ script = ExtResource("3_xhvim")
 [node name="Level0" type="Node2D" parent="."]
 
 [node name="Campfire" parent="Level0" instance=ExtResource("5_38dwb")]
-num_points = 10
-random_offset = 5.0
 
 [node name="Woman" parent="Level0" instance=ExtResource("4_pxnl0")]
 position = Vector2(-94, 67)

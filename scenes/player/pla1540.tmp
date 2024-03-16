@@ -14,7 +14,7 @@ script = ExtResource("1_px2qe")
 [node name="Ghost" type="Line2D" parent="."]
 position = Vector2(-2, -9)
 points = PackedVector2Array(2, 9)
-width = 32.0
+width = 100.0
 width_curve = SubResource("Curve_iujsl")
 texture = ExtResource("2_gs0fi")
 texture_mode = 2
@@ -23,7 +23,6 @@ begin_cap_mode = 1
 end_cap_mode = 1
 round_precision = 32
 script = ExtResource("3_0eiyf")
-length = 150
+length = 20
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true

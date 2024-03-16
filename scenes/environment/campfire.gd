@@ -7,6 +7,7 @@ class_name Campfire
 @export var random_offset := 5.0
 var points_dict = {}
 var progress := 0.0 # 0 to 1
+var progress_rate := 0.125 # 45 deg per sec
 
 # inner class, acts like a struct, very pog
 class PointInfo:
@@ -27,6 +28,9 @@ func _create_follow_points():
 		points_dict[follow_point] = PointInfo.new()
 		points_dict[follow_point].randomOffset = Vector2(randf_range(-random_offset, random_offset), randf_range(-random_offset, random_offset))
 		points_dict[follow_point].progressOffset = float(i) / float(num_points)
+		var sprite = Sprite2D.new()
+		sprite.texture = load("res://assets/image/fearthink-mc.png")
+		follow_point.add_child(sprite)
 	
 
 func follow_random_point(npc : NPC): 
@@ -46,13 +50,21 @@ func clear_npc(npc : NPC):
 	npc.target_point = Vector2()
 	npc.point_index = 0
 
-func set_npc_points():
-	for follow_point : PathFollow2D in points_dict.keys():
-		var point : PointInfo = points_dict[follow_point]
-		for npc : NPC in point.currentFollowingNpcs:
-			npc.target_point = follow_point.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	set_npc_points()
+	rotate_points(delta)
 
+func set_npc_points():
+	for follow_point : PathFollow2D in points_dict.keys():
+		var point : PointInfo = points_dict[follow_point]
+		for npc : NPC in point.currentFollowingNpcs:
+			npc.target_point = follow_point.global_position + point.randomOffset
+
+func rotate_points(delta):
+	progress += delta * progress_rate
+	progress = fmod(progress, 1.0)
+	for follow_point : PathFollow2D in points_dict.keys():
+		follow_point.progress_ratio = progress + points_dict[follow_point].progressOffset
+	

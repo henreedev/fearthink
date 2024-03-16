@@ -11,15 +11,16 @@ config_version=5
 [application]
 
 config/name="Fearthink"
-run/main_scene="res://scenes/player/player.tscn"
+run/main_scene="res://scenes/mains/game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://assets/image/fearthink-mc.png"
 
 [display]
 
-window/size/viewport_width=348
+window/size/viewport_width=384
 window/size/viewport_height=216
-window/size/mode=3
+window/size/mode=2
+window/stretch/mode="canvas_items"
 
 [rendering]
 
