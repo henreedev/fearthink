@@ -2,12 +2,15 @@ extends StaticBody2D
 class_name Campfire
 
 @onready var path : Path2D = $Path2D
+@onready var level : Level = get_tree().get_first_node_in_group("level")
 @export var num_points = 10
 @export var random_offset := 10.0
 var points_dict = {}
 var progress := 0.0 # 0 to 1
 var progress_rate := 0.125 # 45 deg per sec
 var slots_full = false # true if each follow point has an npc
+var fire_scale = Vector2(0.0, 0.0)
+var fire_visible = false
 
 # inner class, acts like a struct, very pog
 class PointInfo:
@@ -28,9 +31,6 @@ func _create_follow_points():
 		points_dict[follow_point] = PointInfo.new()
 		points_dict[follow_point].randomOffset = Vector2(randf_range(-random_offset, random_offset), randf_range(-random_offset, random_offset))
 		points_dict[follow_point].progressOffset = float(i) / float(num_points)
-		var sprite = Sprite2D.new()
-		sprite.texture = load("res://assets/image/fearthink-mc.png")
-		follow_point.add_child(sprite)
 
 func follow_random_point(npc : NPC): 
 	var length = points_dict.size() # should be == num_points
@@ -71,6 +71,12 @@ func clear_npc(npc : NPC):
 func _process(delta):
 	set_npc_points()
 	rotate_points(delta)
+	set_fire_vars()
+
+func set_fire_vars():
+	if level.transitioning:
+		$Fire.visible = fire_visible
+		$Fire.scale = fire_scale
 
 func set_npc_points():
 	for follow_point : PathFollow2D in points_dict.keys():

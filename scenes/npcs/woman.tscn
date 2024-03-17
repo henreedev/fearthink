@@ -4,21 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://dxwfiucft6fkr" path="res://assets/image/fearthink-woman-spritesheet.png" id="1_ldacu"]
 [ext_resource type="Shader" path="res://scenes/npcs/npc-outline.gdshader" id="2_7u2w5"]
 
-[sub_resource type="Gradient" id="Gradient_c12wc"]
+[sub_resource type="Gradient" id="Gradient_l7dqb"]
 offsets = PackedFloat32Array(0, 0.778689, 1)
 colors = PackedColorArray(0.515588, 0.00350411, 0.945945, 1, 0.647059, 0.462745, 1, 1, 0.647059, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_uq0n1"]
-gradient = SubResource("Gradient_c12wc")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qoljp"]
+gradient = SubResource("Gradient_l7dqb")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nq7uq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ev8v2"]
 shader = ExtResource("2_7u2w5")
 shader_parameter/base_outline_color = Color(0, 0, 0, 1)
 shader_parameter/flash_color = Color(0.839216, 0.835294, 0.823529, 1)
 shader_parameter/fear_progress = 0.0
 shader_parameter/flashing = false
 shader_parameter/flash_freq = 0.25
-shader_parameter/gradient = SubResource("GradientTexture1D_uq0n1")
+shader_parameter/gradient = SubResource("GradientTexture1D_qoljp")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpuss"]
 atlas = ExtResource("1_ldacu")
@@ -205,10 +205,15 @@ script = ExtResource("1_fytjk")
 metadata/_edit_group_ = true
 
 [node name="AS" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_nq7uq")
+material = SubResource("ShaderMaterial_ev8v2")
 sprite_frames = SubResource("SpriteFrames_uq1iu")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_bvc7y")
+
+[node name="WanderTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

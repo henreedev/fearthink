@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ha2udcnoeq7m"]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_w8lyv"]
+
+[sub_resource type="Gradient" id="Gradient_iytbb"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_467cb"]
+gradient = SubResource("Gradient_iytbb")
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_w8lyv")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -73.465
+offset_right = 20.0
+offset_bottom = -33.465
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_467cb")
