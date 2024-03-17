@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://duya4w4v0kphb"]
+
+[ext_resource type="Script" path="res://scenes/npcs/scream.gd" id="1_jacld"]
+[ext_resource type="Texture2D" uid="uid://ch7odr1oep1wv" path="res://assets/image/scream-circle.png" id="2_jbhqc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unqrd"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hju5k"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfmfr"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glyqo"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3t854"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uupmi"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srsi0"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg2vr"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxjkv"]
+atlas = ExtResource("2_jbhqc")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eygwq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hju5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfmfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glyqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3t854")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uupmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srsi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg2vr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxjkv")
+}],
+"loop": false,
+"name": &"scream",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nh3j6"]
+radius = 45.3982
+
+[node name="Scream" type="Area2D"]
+script = ExtResource("1_jacld")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_unqrd")
+sprite_frames = SubResource("SpriteFrames_eygwq")
+animation = &"scream"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nh3j6")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

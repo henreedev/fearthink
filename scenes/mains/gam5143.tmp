@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://qlbbmuigyif2"]
+[gd_scene load_steps=5 format=3 uid="uid://qlbbmuigyif2"]
 
 [ext_resource type="PackedScene" uid="uid://cjwv2mvopxb2n" path="res://scenes/environment/level.tscn" id="1_6qgvq"]
 [ext_resource type="Script" path="res://scenes/mains/game.gd" id="1_hdimc"]
 [ext_resource type="PackedScene" uid="uid://br67vqr2q2coi" path="res://scenes/player/player.tscn" id="3_hpiag"]
 [ext_resource type="PackedScene" uid="uid://ha2udcnoeq7m" path="res://scenes/ui/hud.tscn" id="4_c8mqp"]
-[ext_resource type="AudioStream" uid="uid://dk2mwgfme07ye" path="res://assets/audio/Parasite_Sketch.mp3" id="5_p5wxg"]
 
 [node name="Game" type="Node2D" groups=["game"]]
 script = ExtResource("1_hdimc")
@@ -15,13 +14,3 @@ layer_0/tile_data = PackedInt32Array(-2, 0, 0, 65534, 0, 0, 131070, 0, 0, 131071
 [node name="Player" parent="." instance=ExtResource("3_hpiag")]
 
 [node name="Hud" parent="." instance=ExtResource("4_c8mqp")]
-
-[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_p5wxg")
-volume_db = -23.807
-autoplay = true
-max_distance = 9665.0
-attenuation = 1.81459e-05
-panning_strength = 0.0
-
-[connection signal="finished" from="BGMusic" to="." method="_on_audio_stream_player_2d_finished"]

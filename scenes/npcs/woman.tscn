@@ -119,7 +119,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"cower",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -204,10 +204,13 @@ size = Vector2(7, 21)
 script = ExtResource("1_fytjk")
 metadata/_edit_group_ = true
 
+[node name="Abilities" type="Node" parent="."]
+
 [node name="AS" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ev8v2")
 sprite_frames = SubResource("SpriteFrames_uq1iu")
 animation = &"walk"
+frame_progress = 0.948224
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)

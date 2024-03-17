@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://comh0seukqggw"]
+
+[ext_resource type="Script" path="res://scenes/environment/GameLevel.gd" id="1_qvldg"]
+[ext_resource type="PackedScene" uid="uid://cholh3op7m2nn" path="res://scenes/environment/campfire.tscn" id="2_mw2hy"]
+[ext_resource type="PackedScene" uid="uid://cp0inmdtxeq63" path="res://scenes/npcs/woman.tscn" id="3_8t0dm"]
+
+[node name="CurrentLevel" type="Node2D"]
+script = ExtResource("1_qvldg")
+
+[node name="Campfire2" parent="." instance=ExtResource("2_mw2hy")]
+position = Vector2(0, 2)
+
+[node name="Woman" parent="." instance=ExtResource("3_8t0dm")]
+position = Vector2(-94, -99)
+
+[node name="Woman2" parent="." instance=ExtResource("3_8t0dm")]
+position = Vector2(189, -68)
+
+[node name="Woman3" parent="." instance=ExtResource("3_8t0dm")]
+position = Vector2(-186, 10)
+
+[node name="Woman4" parent="." instance=ExtResource("3_8t0dm")]
+position = Vector2(-5, 107)
+
+[node name="Woman5" parent="." instance=ExtResource("3_8t0dm")]
+position = Vector2(75, -147)
+
+[node name="Woman6" parent="." instance=ExtResource("3_8t0dm")]
+position = Vector2(97, 64)

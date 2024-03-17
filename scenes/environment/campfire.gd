@@ -63,7 +63,6 @@ func clear_npc(npc : NPC):
 	var point_to_clear : PointInfo = points_dict.values()[npc.point_index]
 	point_to_clear.currentFollowingNpcs.erase(npc)
 	npc.following_campfire = null
-	npc.target_point = Vector2()
 	npc.point_index = 0
 
 

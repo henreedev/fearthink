@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbrf481gsmvgr"]
+
+[ext_resource type="Script" path="res://scenes/npcs/rumor.gd" id="1_3we1o"]
+[ext_resource type="Texture2D" uid="uid://dgf1ulblr0udp" path="res://assets/image/fear-wave.png" id="1_fcxtk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dgq4s"]
+light_mode = 1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y15c6"]
+radius = 3.0
+height = 16.0
+
+[node name="Rumor" type="Area2D"]
+script = ExtResource("1_3we1o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_dgq4s")
+texture = ExtResource("1_fcxtk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_y15c6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -12,6 +12,7 @@ var level_size : Vector2
 @onready var swirl : AnimatedSprite2D = $Selector/Swirl
 @onready var ghost : Line2D = $Ghost
 @onready var level : Level = get_tree().get_first_node_in_group("level")
+@onready var hud : HUD = get_tree().get_first_node_in_group("hud")
 var selected_npcs = []
 var selected_npc : NPC 
 var selection_range_sqrd := 125.0 * 125.0
@@ -60,9 +61,15 @@ func _follow_host():
 
 func _enter_on_input():
 	if Input.is_action_just_pressed("enter") and selected_npc:
-		locked_in_npc = selected_npc
-		swirl.animation = "enter"
-		begin_travelling()
+		if selected_npc.flashing:
+			if inhabiting_npc:
+				inhabiting_npc.inhabited = false
+			inhabiting_npc = selected_npc
+			begin_inhabiting()
+		else:
+			locked_in_npc = selected_npc
+			swirl.animation = "enter"
+			begin_travelling()
 
 func _move_screen_at_edge(delta):
 	var mouse_pos := get_local_mouse_position()
@@ -142,6 +149,7 @@ func clamp_pos_to_level_dims():
 	global_position.x = clamp(global_position.x, -x, x)
 	global_position.y = clamp(global_position.y, -y, y)
 
+
 func begin_inhabiting():
 	swirl.animation = "inhabit"
 	# inhabiting_npc should be populated
@@ -155,7 +163,10 @@ func begin_travelling():
 	create_tween().tween_property($Camera2D, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 func begin_planning():
+	hud.hide_fear_bar()
 	state = State.PLANNING
+	inhabiting_npc = null
+	locked_in_npc = null
 	ghost.visible = true
 	ghost.modulate = Color(1.0, 1.0, 1.0, 0.0)
 	swirl.visible = false
@@ -173,6 +184,7 @@ func begin_planning():
 
 func begin_ready():
 	state = State.READY
+	
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property($Camera2D, "zoom", Vector2(0.8, 0.8), 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(ghost, "modulate", Color(1.0,1.0,1.0,0.0), 1.0)
@@ -181,7 +193,7 @@ func begin_ready():
 	level.transitioning = true
 	tween.tween_property(level, "campfires_visible", true, 0.0)
 	tween.tween_property(level, "campfire_scale", 1.0, 3.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	
+	hud.show_fear_bar()
 	create_tween().tween_property(ghost, "visible", false, 0.0)
 	create_tween().tween_property(swirl, "visible", true, 0.0)
 	await get_tree().create_timer(3.0).timeout
